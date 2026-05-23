@@ -1,4 +1,4 @@
-# An ML-powered intent detection engine that analyses 25 company signals across hiring, funding, tech stack, growth, and engagement 
+An ML-powered intent detection engine that analyses 25 company signals across hiring, funding, tech stack, growth, and engagement 
 to predict which companies are in an active buying window right now.
 
 ---
