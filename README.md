@@ -22,7 +22,34 @@ An AI-powered intent detection engine that analyses company signals across diffe
 
 ---
 
-# Step 2 — Start the API 
+# Tech Stack
+
+Python
+
+Groq API
+
+LangChain
+
+Streamlit
+
+-----
+
+
+# Use Cases
+
+Business Intelligence
+
+Company Analytics
+
+Self-Service Data Querying
+
+Enterprise Reporting
+
+Data Exploration
+
+---
+
+# Start 
 
 bash cd api
 
