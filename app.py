@@ -4,7 +4,7 @@ import requests
 from groq import Groq
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="IntentPulse", page_icon="⚡", layout="wide")
+st.set_page_config(page_title="IntentPulse", page_icon="🎯", layout="wide")
 
 st.markdown("""
 <style>
@@ -182,12 +182,11 @@ with st.sidebar:
     days_touch    = st.slider("Days since last touch", 0, 365, 30)
 
     st.divider()
-    score_btn = st.button("⚡ Run IntentPulse", use_container_width=True)
+    score_btn = st.button("🎯 Run IntentPulse", use_container_width=True)
 
 
 # ── header ──
-st.markdown("## ⚡ IntentPulse")
-st.caption("AI-powered buying signal detection — know who is ready to buy, before they tell you.")
+st.markdown("## 🎯 IntentPulse")
 st.divider()
 
 # ── analyze ──
