@@ -1,5 +1,4 @@
-An ML-powered intent detection engine that analyses 25 company signals across hiring, funding, tech stack, growth, and engagement 
-to predict which companies are in an active buying window right now.
+# An AI-powered intent detection engine
 
 ---
 
@@ -23,7 +22,7 @@ Visualises results on a Streamlit dashboard with a live gauge
 ---
 
 
-# Step 2 — Start the API (VS Code)
+# Step 2 — Start the API 
 
 bash cd api
 
@@ -38,5 +37,11 @@ bash cd frontend
 pip install streamlit plotly requests
 
 streamlit run app.py
+
+----
+
+# Author
+
+Danish Zulfiqar
 
 ----
