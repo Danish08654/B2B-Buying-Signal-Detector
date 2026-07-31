@@ -38,6 +38,8 @@ streamlit run app.py
 
 # Author
 
-Danish Zulfiqar
+Danish Zulfiqar |AI Engineer
 
 ----
+
+#
