@@ -1,4 +1,4 @@
-# An AI-powered intent detection engine
+# AI intent B2B Buy detection system
 
 ---
 
