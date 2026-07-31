@@ -1,9 +1,10 @@
 import streamlit as st
 import json
+import requests
 from groq import Groq
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="IntentPulse", page_icon="🎯", layout="wide")
+st.set_page_config(page_title="IntentPulse", page_icon="⚡", layout="wide")
 
 st.markdown("""
 <style>
@@ -39,6 +40,39 @@ hr { border-color: #e2e8f0 !important; }
 INDUSTRIES     = ['SaaS','FinTech','HealthTech','E-commerce','Logistics','EdTech','CyberSecurity','MarTech','HRTech','LegalTech']
 COMPANY_SIZES  = ['1-10','11-50','51-200','201-500','501-1000','1000+']
 FUNDING_ROUNDS = {0:"None", 1:"Seed", 2:"Series A", 3:"Series B", 4:"Series C+"}
+
+def verify_company(name: str) -> dict:
+    """Check if company exists via OpenCorporates (free, no API key needed)."""
+    try:
+        r = requests.get(
+            "https://api.opencorporates.com/v0.4/companies/search",
+            params={"q": name, "per_page": 3},
+            timeout=6
+        )
+        if r.status_code != 200:
+            return {"found": False, "message": "Could not reach OpenCorporates."}
+
+        data  = r.json()
+        items = data.get("results", {}).get("companies", [])
+
+        if not items:
+            return {"found": False, "message": f'No registered company found for "{name}".'}
+
+        top = items[0]["company"]
+        return {
+            "found":        True,
+            "name":         top.get("name", name),
+            "country":      top.get("jurisdiction_code", "").upper().split("_")[0],
+            "status":       top.get("current_status") or "Unknown",
+            "incorporated": top.get("incorporation_date") or "Unknown",
+            "company_type": top.get("company_type") or "Unknown",
+            "source_url":   top.get("opencorporates_url", ""),
+        }
+    except requests.exceptions.Timeout:
+        return {"found": False, "message": "OpenCorporates timed out. Proceeding without verification."}
+    except Exception as e:
+        return {"found": False, "message": f"Verification error: {e}"}
+
 
 def get_client():
     try: return Groq(api_key=st.secrets["GROQ_API_KEY"])
@@ -148,11 +182,12 @@ with st.sidebar:
     days_touch    = st.slider("Days since last touch", 0, 365, 30)
 
     st.divider()
-    score_btn = st.button("🎯 Run IntentPulse", use_container_width=True)
+    score_btn = st.button("⚡ Run IntentPulse", use_container_width=True)
 
 
 # ── header ──
-st.markdown("## 🎯 IntentPulse")
+st.markdown("## ⚡ IntentPulse")
+st.caption("AI-powered buying signal detection — know who is ready to buy, before they tell you.")
 st.divider()
 
 # ── analyze ──
@@ -179,6 +214,35 @@ if score_btn:
         "days_since_last_touch": days_touch
     }
 
+    # ── Step 1: verify company ──
+    with st.spinner(f'Verifying "{company_name}" on OpenCorporates…'):
+        info = verify_company(company_name)
+
+    if info["found"]:
+        st.markdown(f"""
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;
+             border-radius:10px;padding:14px 18px;margin-bottom:14px;">
+            <div style="font-weight:700;color:#14532d;margin-bottom:8px;">✅ Company Verified — OpenCorporates</div>
+            <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:0.85rem;color:#166534;">
+                <span><b>Registered Name:</b> {info['name']}</span>
+                <span><b>Country:</b> {info['country']}</span>
+                <span><b>Status:</b> {info['status']}</span>
+                <span><b>Incorporated:</b> {info['incorporated']}</span>
+                <span><b>Type:</b> {info['company_type']}</span>
+            </div>
+            {'<a href="' + info["source_url"] + '" target="_blank" style="font-size:0.78rem;color:#15803d;margin-top:6px;display:inline-block;">View on OpenCorporates →</a>' if info.get("source_url") else ""}
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div style="background:#fefce8;border:1px solid #fde68a;border-left:4px solid #d97706;
+             border-radius:10px;padding:14px 18px;margin-bottom:14px;">
+            <div style="font-weight:700;color:#92400e;margin-bottom:4px;">⚠️ Company Not Verified</div>
+            <div style="font-size:0.85rem;color:#a16207;">{info['message']} Analysis will still run based on your inputs.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ── Step 2: Groq analysis ──
     with st.spinner("Analyzing buying signals…"):
         try:
             r = analyze(payload)
