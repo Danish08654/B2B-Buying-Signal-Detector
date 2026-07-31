@@ -1,5 +1,7 @@
 # B2B Buy detection system
 
+An AI-powered intent detection engine that analyses company signals across different field and engagement to predict which companies are in an active buying.
+
 ---
 
 # What It Does
