@@ -141,7 +141,7 @@ Scoring rules:
 
 # ── sidebar ──
 with st.sidebar:
-    st.markdown("## ⚡ IntentPulse")
+    st.markdown("## ⚡ Intent Pulse")
     st.divider()
 
     company_name = st.text_input("Company Name", "Acme Corp")
@@ -182,11 +182,11 @@ with st.sidebar:
     days_touch    = st.slider("Days since last touch", 0, 365, 30)
 
     st.divider()
-    score_btn = st.button("🎯 Run IntentPulse", use_container_width=True)
+    score_btn = st.button("🎯 Run Intent Pulse", use_container_width=True)
 
 
 # ── header ──
-st.markdown("## 🎯 IntentPulse")
+st.markdown("## 🎯 Intent Pulse")
 st.divider()
 
 # ── analyze ──
