@@ -2,7 +2,6 @@
 
 ---
 
-
 # What It Does
 
 Ingests 25 signals across 5 categories per company
@@ -21,7 +20,6 @@ Visualises results on a Streamlit dashboard with a live gauge
 
 ---
 
-
 # Step 2 — Start the API 
 
 bash cd api
@@ -29,8 +27,6 @@ bash cd api
 pip install -r requirements.txt
 
 uvicorn main:app --reload
-
-Start the dashboard (VS Code)
 
 bash cd frontend
 
