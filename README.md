@@ -1,4 +1,4 @@
-# AI intent B2B Buy detection system
+# B2B Buy detection system
 
 ---
 
