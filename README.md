@@ -4,19 +4,19 @@
 
 # What It Does
 
-Ingests 25 signals across 5 categories per company
+1 Ingests 25 signals across 5 categories per company
 
-Predicts buying intent probability using XGBoost
+2 Predicts buying intent probability using XGBoost
 
-Ranks companies into Hot / Warm / Lukewarm / Cold tiers
+3 Ranks companies into Hot / Warm / Lukewarm / Cold tiers
 
-Returns the top buying signals and missing signals per company
+4 Returns the top buying signals and missing signals per company
 
-Recommends a specific sales action per tier
+5 Recommends a specific sales action per tier
 
-Serves everything via a FastAPI REST endpoint
+6 Serves everything via a FastAPI REST endpoint
 
-Visualises results on a Streamlit dashboard with a live gauge
+7 Visualises results on a Streamlit dashboard with a live gauge
 
 ---
 
@@ -38,8 +38,6 @@ streamlit run app.py
 
 # Author
 
-Danish Zulfiqar |AI Engineer
+# Danish Zulfiqar |AI Engineer
 
 ----
-
-#
