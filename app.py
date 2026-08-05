@@ -213,34 +213,6 @@ if score_btn:
         "days_since_last_touch": days_touch
     }
 
-    # ── Step 1: verify company ──
-    with st.spinner(f'Verifying "{company_name}" on OpenCorporates…'):
-        info = verify_company(company_name)
-
-    if info["found"]:
-        st.markdown(f"""
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid #16a34a;
-             border-radius:10px;padding:14px 18px;margin-bottom:14px;">
-            <div style="font-weight:700;color:#14532d;margin-bottom:8px;">✅ Company Verified — OpenCorporates</div>
-            <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:0.85rem;color:#166534;">
-                <span><b>Registered Name:</b> {info['name']}</span>
-                <span><b>Country:</b> {info['country']}</span>
-                <span><b>Status:</b> {info['status']}</span>
-                <span><b>Incorporated:</b> {info['incorporated']}</span>
-                <span><b>Type:</b> {info['company_type']}</span>
-            </div>
-            {'<a href="' + info["source_url"] + '" target="_blank" style="font-size:0.78rem;color:#15803d;margin-top:6px;display:inline-block;">View on OpenCorporates →</a>' if info.get("source_url") else ""}
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown(f"""
-        <div style="background:#fefce8;border:1px solid #fde68a;border-left:4px solid #d97706;
-             border-radius:10px;padding:14px 18px;margin-bottom:14px;">
-            <div style="font-weight:700;color:#92400e;margin-bottom:4px;">⚠️ Company Not Verified</div>
-            <div style="font-size:0.85rem;color:#a16207;">{info['message']} Analysis will still run based on your inputs.</div>
-        </div>
-        """, unsafe_allow_html=True)
-
     # ── Step 2: Groq analysis ──
     with st.spinner("Analyzing buying signals…"):
         try:
