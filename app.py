@@ -186,7 +186,7 @@ with st.sidebar:
 
 
 # ── header ──
-st.markdown("## 🎯 Intent Pulse")
+st.markdown("## B2B Buying-Signal-Detector ")
 st.divider()
 
 # ── analyze ──
