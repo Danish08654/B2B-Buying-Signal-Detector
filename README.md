@@ -70,3 +70,14 @@ streamlit run app.py
 # Danish Zulfiqar |AI Engineer
 
 ----
+# License
+
+This project is licensed under the MIT License.
+
+---
+
+# ⭐ Star This Project
+
+If you find this project helpful, please give it a ⭐ on GitHub!
+
+---
